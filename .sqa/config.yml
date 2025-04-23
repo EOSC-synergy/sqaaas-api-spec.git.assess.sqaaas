@@ -1,0 +1,52 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-api-spec:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-api-spec.git
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/EOSC-synergy/sqaaas-api-spec git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cozy-vermilion-ray.sh
+        container: qc.acc_craggy-zucchini-bulldog
+  QC.Doc:
+    repos:
+      github.com/EOSC-synergy/sqaaas-api-spec find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-vermilion-caterpillar.sh
+        container: qc.doc_flaky-fuchsia-ladybird
+      github.com/EOSC-synergy/sqaaas-api-spec git:
+        commands:
+        - /usr/bin/env sh .sqa/script.shaky-smalt-raccoon.sh
+        container: qc.doc_fuzzy-mauve-budgerigar
+      github.com/EOSC-synergy/sqaaas-api-spec markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-puce-pig.sh
+        container: qc.doc_greasy-azure-meerkat
+  QC.Lic:
+    repos:
+      github.com/EOSC-synergy/sqaaas-api-spec licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.gloppy-fuchsia-coral.sh
+        container: qc.lic_lanky-gold-macaw
+  QC.Sty:
+    repos:
+      github.com/EOSC-synergy/sqaaas-api-spec jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.nippy-champagne-angora.sh
+        container: qc.sty_foggy-olivine-liger
+  QC.Ver:
+    repos:
+      github.com/EOSC-synergy/sqaaas-api-spec get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-emerald-husky.sh
+        container: qc.ver_frumpy-pink-gibbon
+timeout: 5400
